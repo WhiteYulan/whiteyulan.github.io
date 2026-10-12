@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Help with adding, previewing, ordering, and batch printing PDFs in BatchPrint for macOS.">
+  <title>BatchPrint &ndash; Support</title>
+  <style>
+    :root { color-scheme: light; --ink: #20252c; --muted: #526070; --blue: #075cca; --line: #dde3ea; }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 24px; }
+    body { margin: 0; background: #fff; color: var(--ink); font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; overflow-wrap: anywhere; }
+    a { color: var(--blue); text-underline-offset: 4px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    .skip { position: absolute; top: -100px; left: 16px; padding: 8px 16px; background: #fff; z-index: 2; }
+    .skip:focus { top: 8px; }
+    .wrap { width: min(100% - 40px, 1080px); margin-inline: auto; }
+    .masthead { border-bottom: 1px solid var(--line); }
+    .masthead .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 22px; }
+    .brand { display: inline-flex; gap: 12px; align-items: center; font-size: 22px; font-weight: 650; text-decoration: none; color: var(--ink); }
+    .brand img { width: 40px; height: 40px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 24px; }
+    .nav a { padding-block: 8px; }
+    .nav [aria-current] { font-weight: 650; }
+    main { padding-block: 44px 64px; }
+    .intro { max-width: 720px; padding-bottom: 32px; }
+    .eyebrow { color: var(--muted); font-size: 14px; margin: 0 0 8px; }
+    h1 { font-size: 36px; line-height: 1.2; margin: 0 0 16px; font-weight: 650; }
+    h2 { font-size: 23px; line-height: 1.35; margin: 0 0 16px; font-weight: 650; }
+    h3 { font-size: 17px; line-height: 1.4; margin: 0 0 8px; font-weight: 650; }
+    p { margin: 0 0 16px; }
+    .lead { font-size: 18px; color: var(--muted); }
+    .scope { border-left: 3px solid var(--blue); padding: 8px 0 8px 18px; margin: 24px 0 0; }
+    .scope p { margin: 0; }
+    .layout { display: grid; grid-template-columns: 190px minmax(0, 720px); gap: 56px; align-items: start; }
+    .contents { font-size: 14px; }
+    .contents p { font-weight: 650; margin: 0 0 12px; }
+    .contents ul { list-style: none; margin: 0; padding: 0; }
+    .contents li { margin-bottom: 10px; }
+    .contents a { display: inline-block; padding-block: 3px; }
+    section { padding-block: 0 28px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
+    section:last-child { border: 0; margin-bottom: 0; padding-bottom: 0; }
+    ol, ul { padding-inline-start: 24px; margin: 0 0 16px; }
+    li { margin-bottom: 12px; }
+    li p { margin-bottom: 8px; }
+    details { border-top: 1px solid var(--line); padding-block: 16px; }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; font-weight: 650; padding-right: 8px; }
+    details p { margin: 12px 0 0; }
+    .email { display: inline-block; font-size: 18px; font-weight: 600; padding-block: 8px; }
+    .muted { color: var(--muted); }
+    footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; padding-block: 24px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
+    footer p { margin: 0; }
+    @media (max-width: 760px) {
+      .layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      .contents { border-bottom: 1px solid var(--line); padding-bottom: 20px; }
+      .contents ul { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+      .contents li { margin: 0; }
+      main { padding-top: 32px; }
+    }
+    @media (max-width: 440px) {
+      .wrap { width: calc(100% - 32px); }
+      .masthead .wrap { align-items: flex-start; flex-direction: column; gap: 10px; padding-block: 18px; }
+      h1 { font-size: 30px; }
+      .nav { gap: 24px; }
+    }
+    @media print { .skip, .contents { display: none; } .layout { display: block; } details > * { display: block; } a { color: inherit; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="brand" href="support.html"><img src="data:image/png;base64,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" alt="" width="40" height="40">BatchPrint</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="support.html" aria-current="page">Support</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <header class="intro">
+      <p class="eyebrow">BatchPrint 1.0 &middot; macOS 14 or later</p>
+      <h1>BatchPrint Support</h1>
+      <p class="lead">A macOS PDF batch printing utility. Add your PDFs, arrange them in order, and submit them to a printer using the native macOS printing system.</p>
+      <div class="scope"><p><strong>PDF only.</strong> BatchPrint 1.0 does not directly open Word, Excel, or PowerPoint files, and does not support batch export using Save as PDF.</p></div>
+    </header>
+    <div class="layout">
+      <nav class="contents" aria-label="On this page">
+        <p>On this page</p>
+        <ul>
+          <li><a href="#getting-started">Getting started</a></li>
+          <li><a href="#queue">Managing the queue</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+          <li><a href="#contact">Contact Support</a></li>
+        </ul>
+      </nav>
+      <div>
+        <section id="getting-started" aria-labelledby="start-heading">
+          <h2 id="start-heading">Getting started</h2>
+          <ol>
+            <li><h3>Add your PDFs</h3><p>Click <strong>Add PDFs</strong> and select multiple PDF files in the file picker, or drag PDF files from Finder into the BatchPrint window. Duplicate files are not added again.</p></li>
+            <li><h3>Arrange the printing order</h3><p>Use <strong>Move Up</strong> or <strong>Move Down</strong> on a file row or in its context menu. You can also drag rows to reorder them. Files are submitted in the order shown in the queue.</p></li>
+            <li><h3>Preview a PDF</h3><p>Choose <strong>Preview</strong> from the file row or its context menu. You can also select a single file in the queue and press the Space bar. Use the preview window to change pages, zoom, or fit the page.</p></li>
+            <li><h3>Choose your printer and settings</h3><p>Click <strong>Print All</strong>. In the macOS print panel, select a configured physical printer and review the paper size, orientation, and other available printer options. Confirm to begin submitting jobs.</p><p>The settings panel appears once for the batch. Subsequent PDFs reuse those settings. Available options depend on macOS and your printer driver.</p></li>
+            <li><h3>Check the print queue</h3><p><strong>Submitted</strong> means the job was handed to the macOS printing system. It does <strong>not</strong> mean the printer has finished printing. Use the macOS printer queue to check the printer's progress or cancel jobs that have already been submitted.</p></li>
+          </ol>
+        </section>
+        <section id="queue" aria-labelledby="queue-heading">
+          <h2 id="queue-heading">Managing the queue</h2>
+          <ul>
+            <li><strong>Remove:</strong> removes a file from BatchPrint's list without deleting the original PDF.</li>
+            <li><strong>Clear All:</strong> choose this in the queue actions menu and confirm to remove all files from the app. Jobs already submitted to macOS are not canceled.</li>
+            <li><strong>Cancel Queue:</strong> stops submitting remaining files after the current file. It does not cancel jobs already handed to macOS.</li>
+            <li><strong>Retry:</strong> click Print All again after resolving a problem. Files already marked Submitted are skipped.</li>
+            <li><strong>Reset Queue:</strong> makes files eligible for printing again, including files marked Submitted. Existing jobs stay in the macOS print queue, so resetting and printing again may produce duplicate copies.</li>
+          </ul>
+          <p class="muted">Adding, reordering, removing, resetting, and clearing are unavailable while a batch is being submitted.</p>
+        </section>
+        <section id="troubleshooting" aria-labelledby="help-heading">
+          <h2 id="help-heading">Common questions &amp; troubleshooting</h2>
+          <details>
+            <summary>Can I print Word, Excel, or PowerPoint files?</summary>
+            <p>BatchPrint 1.0 accepts PDF files only. Export your document to PDF from its original application, check that PDF, and then add it to BatchPrint.</p>
+          </details>
+          <details>
+            <summary>Can I choose Save as PDF or Preview in the print panel?</summary>
+            <p>No. BatchPrint 1.0 submits batches to physical printers; it does not offer batch PDF export or the print panel's Preview destination. If no jobs have been submitted in the attempt, an unsupported destination leaves the remaining PDFs Ready so you can select a printer and try again. The app's own file preview is available before printing.</p>
+          </details>
+          <details>
+            <summary>My printer is missing, paused, or unavailable.</summary>
+            <p>Check <strong>System Settings &gt; Printers &amp; Scanners</strong>. Make sure the printer is configured, powered on, connected, and not paused. Check its macOS queue and any driver or manufacturer guidance before retrying.</p>
+            <p>Compatibility depends on your printer, driver, supported paper sizes, and macOS configuration. BatchPrint does not guarantee compatibility with every printer.</p>
+          </details>
+          <details>
+            <summary>A PDF cannot be opened or added.</summary>
+            <p>Confirm that the file is a readable PDF with at least one page. If it has been moved, deleted, or its access permission has expired, remove the entry and add the file again. A damaged file may need to be re-exported from its original application. Password-protected PDFs cannot be opened by BatchPrint's preview.</p>
+          </details>
+          <details>
+            <summary>The paper size is unsupported or content does not fit.</summary>
+            <p>Choose a paper size supported by your printer, such as A4 or Letter, in the print panel. BatchPrint fits PDF content within the printer's reported printable area without enlarging smaller pages. Check the PDF itself: content outside its CropBox is not restored by paper fitting.</p>
+          </details>
+          <details>
+            <summary>A file shows Failed and later files show Canceled.</summary>
+            <p>A submission error stops the remaining queue. Check the error shown for the failed file, the printer connection, and the macOS printer queue. After resolving the issue, click Print All to retry files that have not been submitted. Previously submitted jobs remain in macOS and are skipped.</p>
+          </details>
+          <details>
+            <summary>Files show Submitted but nothing has printed.</summary>
+            <p>Open the macOS printer queue. A job may be waiting, paused, or blocked by a printer problem such as missing paper. Submitted confirms acceptance by macOS, not physical printing completion. Avoid resetting and resubmitting until you have checked for existing jobs.</p>
+          </details>
+        </section>
+        <section id="contact" aria-labelledby="contact-heading">
+          <h2 id="contact-heading">Contact Support</h2>
+          <p>Email for BatchPrint support:</p>
+          <a class="email" href="mailto:520456364@qq.com">520456364@qq.com</a>
+          <p>Please include your macOS version, BatchPrint version, printer model, the steps that led to the problem, and the exact error message. A screenshot with personal information removed can help.</p>
+          <p>Do not send passwords or confidential PDFs. Describe the issue first; a non-sensitive sample document may be useful if requested.</p>
+          <p>For information about PDF handling, printing, and support correspondence, read the <a href="privacy.html">Privacy Policy</a>.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer><div class="wrap"><p>&copy; 2026 BatchPrint. All rights reserved.</p><a href="privacy.html">Privacy Policy</a></div></footer>
+</body>
+</html>
